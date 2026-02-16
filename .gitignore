@@ -3,5 +3,4 @@ config
 logs
 plugins
 *.pyc
-working_data
 config/airflow.cfg
