@@ -4,7 +4,13 @@ from airflow import DAG
 # from airflow.operators.python import PythonOperator
 from airflow.providers.standard.operators.python import PythonOperator
 from datetime import datetime, timedelta
-from src.lab import load_data, data_preprocessing, build_save_model, load_model_elbow
+from src.lab import (
+    ingress_data,
+    load_data,
+    data_preprocessing,
+    build_save_model,
+    load_evaluate_model,
+)
 
 
 # Define default arguments for your DAG
@@ -17,11 +23,16 @@ default_args = {
 
 # Create a DAG instance named 'Airflow_Lab1' with the defined default arguments
 with DAG(
-    "Airflow_Lab1",
+    "Data-Preprocessing-and-Regressor-Training",
     default_args=default_args,
-    description="Dag example for Lab 1 of Airflow series",
+    description="Sample DAG which take in data csv, creates train/test split, and then outputs the best result",
     catchup=False,
 ) as dag:
+    ingress_data_task = PythonOperator(
+        task_id="ingress_data_task",
+        python_callable=ingress_data,
+    )
+
     # Task to load data, calls the 'load_data' Python function
     load_data_task = PythonOperator(
         task_id="load_data_task",
@@ -44,14 +55,15 @@ with DAG(
 
     # Task to load a model using the 'load_model_elbow' function, depends on 'build_save_model_task'
     load_model_task = PythonOperator(
-        task_id="load_model_task",
-        python_callable=load_model_elbow,
+        task_id="load_model_evaluate_task",
+        python_callable=load_evaluate_model,
         op_args=["model.sav", build_save_model_task.output],
     )
 
     # Set task dependencies
     (
-        load_data_task
+        ingress_data_task
+        >> load_data_task
         >> data_preprocessing_task
         >> build_save_model_task
         >> load_model_task
