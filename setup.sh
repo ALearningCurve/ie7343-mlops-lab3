@@ -1,9 +1,12 @@
 #!/bin/bash
-set -e
+trap 's=$?; echo "$0: Error on line "$LINENO": "$BASH_COMMAND""; exit $s' ERR
+set -Eeuo pipefail
+
 
 # Remove existing .env file if it exists
 rm -f .env
 rm -rf ./logs ./plugins ./config
+touch .env
 
 # Stop and remove containers, networks, and volumes
 docker compose down -v

@@ -1,7 +1,16 @@
-# Airflow lab
+# ie7343-mlops-lab3
 
-- In order to install Airflow using docker you can watch our [Airflow Lab1 Tutorial Video](https://youtu.be/exFSeGUbn4Q?feature=shared)
-- For latest step-by-step instructions, check out this blog - [AirFlow Lab-1](https://www.mlwithramin.com/blog/airflow-lab1)
+This lab submission is a modification of `Labs/Airflow_Labs/Lab_1` in the main repo.
+
+The starter code for that lab does k-mean clustering using the elbow method to find optimal "k" to use.
+
+
+## Running
+
+1. Install the [uv](https://github.com/astral-sh/uv) package manager. Following  instructions assumes you have docker installed.
+2. Install deps with `uv sync`
+3. Create required folder structure with `bash setup.sh`
+
 
 ### ML Model
 
