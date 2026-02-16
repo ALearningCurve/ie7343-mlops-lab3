@@ -19,3 +19,4 @@ echo "AIRFLOW_UID=$(id -u)" > .env
 
 # Run airflow CLI to show current config
 docker compose run --rm airflow-cli airflow config list
+
