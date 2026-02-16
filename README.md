@@ -10,6 +10,10 @@ It defined the the following steps:
 - `build_save_model` to build k-means, save to file, and return SSE values
 - `load_model_elbow` find the optimal number of cluster via elbow method
 
+Our submmission changes the following:
+- Use extended variant of airflow container to map in dependencies using uv
+- 
+
 
 ## Running
 

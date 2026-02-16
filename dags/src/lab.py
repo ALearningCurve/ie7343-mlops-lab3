@@ -15,7 +15,7 @@ class Paths:
 
     # Data paths
     data_root = working_data_root
-    file_csv = data_root / "file.csv"
+    file_csv = data_root / "train.csv"
     test_csv = data_root / "test.csv"
 
     # Model paths

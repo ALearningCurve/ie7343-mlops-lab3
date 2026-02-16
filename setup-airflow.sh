@@ -18,5 +18,6 @@ mkdir -p ./logs ./plugins ./config
 echo "AIRFLOW_UID=$(id -u)" > .env
 
 # Run airflow CLI to show current config
-docker compose run --rm airflow-cli airflow config list
+uv pip compile pyproject.toml -o requirements.txt
+docker compose run --rm --build airflow-cli airflow config list 
 
